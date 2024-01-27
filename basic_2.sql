@@ -19,3 +19,4 @@ VALUES ('hitesh', 'hitesh@lco.dev', 35),
         ('Jimmy', 'jimmy@yahoo.co.in', 54),
         ('lina', 'lina@yahoo.co.in', 35),
         ('hitesh', 'hitesh@yahoo.co.in', 56);
+
