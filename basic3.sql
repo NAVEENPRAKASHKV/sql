@@ -56,4 +56,8 @@
 
 -- select concat (stu_fname , ' ' , stu_lname ,' he is loggined in the accout ',login_count, ' and his total course count is ', course_count) as full_info from students;
 
-select substring(email,1,7) from students;
+-- select concat(substring(email,1,7),'...') from students;
+
+select * from students;
+
+SELECT email, stu_fname ,login_count from students where (login_count=(select max(login_count) from students));
