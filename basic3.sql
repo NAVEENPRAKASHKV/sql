@@ -54,4 +54,6 @@
 
 -- select concat (stu_fname , ' ' , stu_lname) as full_name, login_count from students;
 
-select concat (stu_fname , ' ' , stu_lname ,' he is loggined in the accout ',login_count, ' and his total course count is ', course_count) as full_info from students;
+-- select concat (stu_fname , ' ' , stu_lname ,' he is loggined in the accout ',login_count, ' and his total course count is ', course_count) as full_info from students;
+
+select substring(email,1,7) from students;
