@@ -58,6 +58,17 @@
 
 -- select concat(substring(email,1,7),'...') from students;
 
-select * from students;
+-- select * from students;
 
-SELECT email, stu_fname ,login_count from students where (login_count=(select max(login_count) from students));
+-- SELECT email, stu_fname ,login_count from students where (login_count=(select max(login_count) from students));
+
+-- SELECT login_count,signup_month from students where  (signup_month in (7,10)) ORDER BY signup_month ASC;
+
+set@@sql_mode=' ';
+-- SELECT max(login_count) from students where signup_month in (7,10) GROUP BY signup_month;
+
+-- select * from students;
+
+-- select count(login_count),signup_month from students GROUP BY signup_month;
+
+select * from students WHERE (login_count>=20 and course_count>=5);
