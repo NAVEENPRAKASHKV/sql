@@ -96,3 +96,7 @@ SELECT * from country WHERE POPULATION > 100000 and COUNTRYCODE= 'usa';
 
 
 SELECT name from country WHERE (POPULATION > 120000 and COUNTRYCODE= 'usa');
+
+-- Q3. Query all columns (attributes) for every row in the CITY table. The CITY table is described as follows:
+
+SELECT * from country;
