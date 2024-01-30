@@ -90,3 +90,9 @@ INSERT INTO  country (ID, NAME, COUNTRYCODE, DISTRICT, POPULATION) VALUES (6,'Ro
 -- The CountryCode for America is USA.
 
 SELECT * from country WHERE POPULATION > 100000 and COUNTRYCODE= 'usa';
+
+
+-- Q2. Query the NAME field for all American cities in the CITY table with populations larger than 120000. The CountryCode for America is USA.
+
+
+SELECT name from country WHERE (POPULATION > 120000 and COUNTRYCODE= 'usa');
