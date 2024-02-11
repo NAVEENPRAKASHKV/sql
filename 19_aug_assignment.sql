@@ -630,8 +630,8 @@ create table IF NOT EXISTS  station (Id INT,City VARCHAR(21), State VARCHAR(2),L
 --Q10 Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). 
 --If there is more than one smallest orlargest city, choose the one that comes first when ordered alphabetically.
 
-      SELECT city, CHAR_LENGTH(city) AS city_length
-FROM station 
-WHERE CHAR_LENGTH(city) = (SELECT MAX(CHAR_LENGTH(city)) FROM station) 
-   OR CHAR_LENGTH(city) = (SELECT MIN(CHAR_LENGTH(city)) FROM station) 
-ORDER BY city ASC;
+                SELECT city, CHAR_LENGTH(city) AS city_length
+            FROM station 
+            WHERE CHAR_LENGTH(city) = (SELECT MAX(CHAR_LENGTH(city)) FROM station) 
+            OR CHAR_LENGTH(city) = (SELECT MIN(CHAR_LENGTH(city)) FROM station) 
+            ORDER BY city ASC;
