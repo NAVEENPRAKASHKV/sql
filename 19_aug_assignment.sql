@@ -114,7 +114,7 @@ SELECT * from country WHERE COUNTRYCODE ="JPN" ;
 SELECT NAME from country WHERE COUNTRYCODE ="JPN" ;
 
 
-create table IF NOT EXISTS  station (Id INT,City VARCHAR(21), State VARCHAR(2),Lat_N INT,	Long_W INT);
+create table IF NOT EXISTS  station (Id INT,City VARCHAR(21), State VARCHAR(2),Lat_N INT,Long_W INT);
 
 -- insert INTO  station (id,city,State,Lat_N,Long_W) values (794,"Kissee Mills","MO",139,73),(824,"Loma Mar","CA",48,130),(603,"Sandy Hook","CT",72,148),
 -- (478,"Tipton","IN",33,97),
@@ -630,8 +630,50 @@ create table IF NOT EXISTS  station (Id INT,City VARCHAR(21), State VARCHAR(2),L
 --Q10 Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). 
 --If there is more than one smallest orlargest city, choose the one that comes first when ordered alphabetically.
 
-                SELECT city, CHAR_LENGTH(city) AS city_length
-            FROM station 
-            WHERE CHAR_LENGTH(city) = (SELECT MAX(CHAR_LENGTH(city)) FROM station) 
-            OR CHAR_LENGTH(city) = (SELECT MIN(CHAR_LENGTH(city)) FROM station) 
-            ORDER BY city ASC;
+                                (SELECT city, CHAR_LENGTH(city) AS city_length
+                FROM station 
+                WHERE CHAR_LENGTH(city) = (SELECT MAX(CHAR_LENGTH(city)) FROM station)  
+                ORDER BY city ASC LIMIT 1)
+
+                UNION
+
+                (SELECT city, CHAR_LENGTH(city) AS city_length
+                FROM station 
+                WHERE CHAR_LENGTH(city) = (SELECT MIN(CHAR_LENGTH(city)) FROM station) 
+                ORDER BY city ASC LIMIT 1);
+
+-- Q11 Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates.
+
+
+                SELECT DISTINCT CITY
+                FROM STATION
+                WHERE CITY REGEXP '^[aeiouAEIOU]';
+
+
+-- Q12 Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates
+
+                SELECT DISTINCT CITY
+                FROM STATION
+                WHERE CITY REGEXP '[aeiouAEIOU]$';
+
+-- Q13 Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates
+
+                SELECT DISTINCT CITY
+                FROM STATION
+                WHERE CITY NOT REGEXP '^[aeiouAEIOU]';
+-- Q14 Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.
+
+
+                SELECT DISTINCT CITY
+                FROM STATION
+                WHERE CITY NOT REGEXP '[aeiouAEIOU]$';
+-- Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels
+
+                SELECT DISTINCT CITY
+                FROM STATION
+                WHERE CITY NOT REGEXP '^[aeiouAEIOU]' OR CITY NOT REGEXP '[aeiouAEIOU]$';
+-- Q16. Query the list of CITY names from STATION that do not start with vowels and do not end with vowels. Your result cannot contain duplicates.
+
+                SELECT DISTINCT CITY
+                FROM STATION
+                WHERE CITY NOT REGEXP '^[aeiouAEIOU]' and CITY NOT REGEXP '[aeiouAEIOU]$';
