@@ -677,3 +677,12 @@ create table IF NOT EXISTS  station (Id INT,City VARCHAR(21), State VARCHAR(2),L
                 SELECT DISTINCT CITY
                 FROM STATION
                 WHERE CITY NOT REGEXP '^[aeiouAEIOU]' and CITY NOT REGEXP '[aeiouAEIOU]$';
+
+
+-- Q17
+
+                create table if not EXISTS product(product_id int,product_name varchar(),unit_price int);
+                create table if not EXISTS sales(seller_id int ,product_id int,buyer_id int,sale_date date,quantity int,price int);
+
+
+
