@@ -703,4 +703,11 @@ create table IF NOT EXISTS  station (Id INT,City VARCHAR(21), State VARCHAR(2),L
 
 -- Q18 Write an SQL query to find all the authors that viewed at least one of their own articles. Return the result table sorted by id in ascending order.
 
-SELECT distinct author_id from Views where author_id = viewer_id;
+SELECT distinct author_id from Views where author_id = viewer_id order by author_id ASC;
+
+-- Q19 If the customer's preferred delivery date is the same as the order date, then the order is called immediately; otherwise, it is called scheduled.
+-- Write an SQL query to find the percentage of immediate orders in the table, rounded to 2 decimal places.
+
+select count(customer_id) as immediately as  from delivery where order_date = customer_pref_ delivery_date;
+
+select count (*) as total_count from delivery ;
