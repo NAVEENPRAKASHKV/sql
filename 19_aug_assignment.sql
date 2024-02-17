@@ -709,3 +709,14 @@ SELECT distinct author_id from Views where author_id = viewer_id order by author
 -- Write an SQL query to find the percentage of immediate orders in the table, rounded to 2 decimal places.
 
         select round((select count(*) from delivery where order_date = customer_pref_delivery_date)/count(*)*100,2) as immediate_percentage from delivery;
+
+--IC Q20  Write an SQL query to find the ctr of each Ad. Round ctr to two decimal points. Return the result table ordered by ctr in descending order and by ad_id in ascending order in case of a tie.
+
+
+        create table if NOT EXISTS Ads (ad_id int,user_id int,Action enum("Clicked","Viewed","Ignored"), PRIMARY KEY (ad_id, user_id));
+        --  INSERT INTO ads(ad_id ,user_id ,Action ) values (1,1,"Clicked"),(2,2,"Clicked"),(3,3,"Viewed"),(5,5,"Ignored"),(1,7,"Ignored"),
+        --  (2,7,"Viewed"),(3,5,"Clicked"),(1,4,"Viewed"),(2,11,"Viewed"),(1,2,"Clicked");
+
+
+-- Q21Write an SQL query to find the team size of each of the employees. Return result table in any order.
+select employee_id, count(team_id) over (partition by team_id) as team_size from employee order by employee_id;
