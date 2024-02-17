@@ -720,3 +720,4 @@ SELECT distinct author_id from Views where author_id = viewer_id order by author
 
 -- Q21Write an SQL query to find the team size of each of the employees. Return result table in any order.
 select employee_id, count(team_id) over (partition by team_id) as team_size from employee order by employee_id;
+
