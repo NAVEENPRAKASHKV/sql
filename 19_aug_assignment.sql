@@ -782,3 +782,21 @@ SELECT distinct author_id from Views where author_id = viewer_id order by author
                         AND u.purchase_date BETWEEN p.start_date AND p.end_date 
                         group by p.product_id;
 
+--Q24 Write an SQL query to report the first login date for each player.Return the result table in any order.The query result format is in the following example.
+
+
+                CREATE TABLE if not EXISTS Activity (
+                player_id INT,
+                device_id INT,
+                event_date DATE,
+                games_played INT,
+                primary key (player_id, event_date)
+                );
+                -- INSERT INTO Activity(player_id, device_id, event_date, games_played)
+                -- VALUES (1, 2, '2016-03-01', 5),
+                --     (1, 2, '2016-05-02', 6),
+                --     (2, 3, '2017-06-25', 1),
+                --     (3, 1, '2016-03-02', 0),
+                --     (3, 4, '2018-07-03', 5);
+
+                SELECT player_id, min(event_date) as first_login from Activity GROUP BY player_id ;
