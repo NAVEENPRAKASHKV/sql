@@ -800,3 +800,15 @@ SELECT distinct author_id from Views where author_id = viewer_id order by author
                 --     (3, 4, '2018-07-03', 5);
 
                 SELECT player_id, min(event_date) as first_login from Activity GROUP BY player_id ;
+
+-- Q25 Write an SQL query to report the device that is first logged in for each player. Return the result table in any order
+
+
+
+        SELECT a.player_id, a.device_id AS first_login
+        FROM Activity a
+        JOIN (
+        SELECT player_id, MIN(event_date) AS min_event_date
+        FROM Activity
+        GROUP BY player_id
+        ) b ON a.player_id = b.player_id AND a.event_date = b.min_event_date;
