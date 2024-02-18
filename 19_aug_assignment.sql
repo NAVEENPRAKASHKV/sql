@@ -741,11 +741,44 @@ SELECT distinct author_id from Views where author_id = viewer_id order by author
 
                 SELECT distinct c.country_name,
                 case 
-                when w.weather_stat<= 15 then "cold" 
-                when w.weather_stat>= 25 then "hot"
+                when avg(w.weather_stat)<= 15 then "cold" 
+                when avg(w.weather_stat)>= 25 then "hot"
                 else "warm"
                 end as weather_type   
                         from Countries as c 
                         JOIN weather as w ON c.country_id=w.country_id 
 
-                        WHERE w.day BETWEEN "2019-11-01" and "2019-11-30";
+                        WHERE w.day BETWEEN "2019-11-01" and "2019-11-30"
+                        GROUP BY c.country_name
+                        ;
+-- Q23Write an SQL query to find the average selling price for each product. average_price should be rounded to 2 decimal places.Return the result table in any order.
+
+                CREATE TABLE if not EXISTS prices (
+                product_id INT,
+                start_date DATE,
+                end_date DATE,
+                Price int,
+                primary key (product_id, start_date, end_date)
+                );
+                CREATE TABLE if not EXISTS UnitsSold (
+                product_id INT,
+                purchase_date DATE,
+                units INT
+                );
+                -- INSERT INTO prices (product_id, start_date, end_date, Price)
+                -- VALUES (1, '2019-02-17', '2019-02-28', 5),
+                --     (1, '2019-03-01', '2019-03-22', 20),
+                -- (2, '2019-02-01', '2019-02-20', 15),
+                --     (2, '2019-02-21', '2019-03-31', 30);
+                -- INSERT INTO UnitsSold (product_id, purchase_date, units)
+                -- VALUES (1, '2019-02-25', 100),
+                --     (1, '2019-03-01', 15),
+                --     (2, '2019-02-10', 200),
+                -- (2, '2019-03-22', 30);
+
+                SELECT p.product_id , round(sum(p.price * u.units )/sum(u.units),2) as average_price
+                        FROM prices AS p
+                        JOIN UnitsSold AS u ON p.product_id = u.product_id
+                        AND u.purchase_date BETWEEN p.start_date AND p.end_date 
+                        group by p.product_id;
+
