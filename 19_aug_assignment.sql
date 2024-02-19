@@ -816,44 +816,129 @@ SELECT distinct author_id from Views where author_id = viewer_id order by author
 
 -- Q26 Write an SQL query to get the names of products that have at least 100 units ordered in February 2020 and their amount.
 
-CREATE TABLE if not EXISTS Products (
-    product_id INT PRIMARY KEY,
-    product_name VARCHAR(255),
-    product_category VARCHAR(255)
-);
+                CREATE TABLE if not EXISTS Products (
+                product_id INT PRIMARY KEY,
+                product_name VARCHAR(255),
+                product_category VARCHAR(255)
+                );
 
--- INSERT INTO Products (product_id, product_name, product_category)
--- VALUES
---     (1, 'Leetcode Solutions', 'Book'),
---     (2, 'Jewels of Stringology', 'Book'),
---     (3, 'HP', 'Laptop'),
---     (4, 'Lenovo', 'Laptop'),
---     (5, 'Leetcode Kit', 'T-shirt');
+                -- INSERT INTO Products (product_id, product_name, product_category)
+                -- VALUES
+                --     (1, 'Leetcode Solutions', 'Book'),
+                --     (2, 'Jewels of Stringology', 'Book'),
+                --     (3, 'HP', 'Laptop'),
+                --     (4, 'Lenovo', 'Laptop'),
+                --     (5, 'Leetcode Kit', 'T-shirt');
 
-CREATE TABLE IF NOT EXISTS Orders (
-    order_id INT,
-    order_date DATE,
-    units INT,
-    product_id INT,
-    FOREIGN KEY (product_id) REFERENCES Products(product_id)
-);
-
-
--- INSERT INTO Orders (product_id, order_date, units)
--- VALUES
---     (1, '2020-02-05', 60),
---     (1, '2020-02-10', 70),
---     (2, '2020-01-18', 30),
---     (2, '2020-02-11', 80),
---     (3, '2020-02-17', 2),
---     (3, '2020-02-24', 3),
---     (4, '2020-03-01', 20),
---     (4, '2020-03-04', 30),
---     (4, '2020-03-04', 60),
---     (5, '2020-02-25', 50),
---     (5, '2020-02-27', 50),
---     (5, '2020-03-01', 50);
+                CREATE TABLE IF NOT EXISTS Orders (
+                order_id INT,
+                order_date DATE,
+                units INT,
+                product_id INT,
+                FOREIGN KEY (product_id) REFERENCES Products(product_id)
+                );
 
 
-SELECT  p.product_name, sum(o.units ) as unit from products p JOIN Orders o on p.product_id= o.product_id 
-WHERE month(o.order_date)="02" and year(o.order_date)=2020 GROUP BY o.product_id having unit >=100;
+                -- INSERT INTO Orders (product_id, order_date, units)
+                -- VALUES
+                --     (1, '2020-02-05', 60),
+                --     (1, '2020-02-10', 70),
+                --     (2, '2020-01-18', 30),
+                --     (2, '2020-02-11', 80),
+                --     (3, '2020-02-17', 2),
+                --     (3, '2020-02-24', 3),
+                --     (4, '2020-03-01', 20),
+                --     (4, '2020-03-04', 30),
+                --     (4, '2020-03-04', 60),
+                --     (5, '2020-02-25', 50),
+                --     (5, '2020-02-27', 50),
+                --     (5, '2020-03-01', 50);
+
+
+        SELECT  p.product_name, sum(o.units ) as unit from products p JOIN Orders o on p.product_id= o.product_id 
+        WHERE month(o.order_date)="02" and year(o.order_date)=2020 GROUP BY o.product_id having unit >=100;
+
+-- ICQ28 Write an SQL query to report the customer_id and customer_name of customers 
+-- who have spent at least $100 in each month of June and July 2020.
+
+                        CREATE TABLE IF NOT EXISTS Customers (
+                        customer_id INT PRIMARY KEY,
+                        name VARCHAR(255),
+                        country VARCHAR(255)
+                        );
+
+                        INSERT INTO Customers (customer_id, name, country)
+                        VALUES
+                        (1, 'Winston', 'USA'),
+                        (2, 'Jonathan', 'Peru'),
+                        (3, 'Moustafa', 'Egypt');
+
+                        CREATE TABLE IF NOT EXISTS Products (
+                        customer_id INT PRIMARY KEY,
+                        description VARCHAR(255),
+                        price DECIMAL(10, 2)
+                        );
+
+                        INSERT INTO  Product (customer_id, description, price)
+                        VALUES
+                        (10, 'LC Phone', 300.00),
+                        (20, 'LC T-Shirt', 10.00),
+                        (30, 'LC Book', 45.00),
+                        (40, 'LC Keychain', 2.00);
+
+                        CREATE TABLE IF NOT EXISTS Orders (
+                        order_id INT,
+                        customer_id INT,
+                        product_id INT,
+                        order_date DATE,
+                        quantity INT,
+                        PRIMARY KEY (order_id)
+                        );
+
+                        INSERT INTO Orders (order_id, customer_id, product_id, order_date, quantity)
+                        VALUES
+                        (1, 1, 10, '2020-06-10', 1),(2, 1, 20, '2020-07-01', 1),
+                        (3, 1, 30, '2020-07-08', 1),(4, 2, 10, '2020-06-15', 1),
+                        (5, 2, 40, '2020-07-01', 10),(6, 3, 20, '2020-06-24', 2),
+                        (7, 3, 30, '2020-06-25', 2),(8, 3, 30, '2020-05-08', 3);
+
+
+-- Q29 Write an SQL query to report the distinct titles of the kid-friendly movies streamed in June 2020. Return the result table in any order.
+
+                        CREATE TABLE IF NOT EXISTS Programs (
+                        program_date DATETIME,
+                        content_id INT,
+                        channel VARCHAR(255),
+                        PRIMARY key (program_date, content_id)
+                        );
+
+                        -- INSERT INTO Programs (program_date, content_id, channel)
+                        -- VALUES
+                        --     ('2020-06-10 08:00', 1, 'LC-Channel'),
+                        --     ('2020-05-11 12:00', 2, 'LC-Channel'),
+                        --     ('2020-05-12 12:00', 3, 'LC-Channel'),
+                        --     ('2020-05-13 14:00', 4, 'Disney Ch'),
+                        --     ('2020-06-18 14:00', 4, 'Disney Ch'),
+                        --     ('2020-07-15 16:00', 5, 'Disney Ch');
+
+
+
+
+                        CREATE TABLE IF NOT EXISTS Contents (
+                        content_id INT PRIMARY KEY,
+                        title VARCHAR(255),
+                        kids_content enum ("Y","N"),
+                        content_type VARCHAR(255)
+                        );
+
+                        -- INSERT INTO Contents (content_id, title, kids_content, content_type)
+                        -- VALUES
+                        --     (1, 'Leetcode Movie', 'N', 'Movies'),
+                        --     (2, 'Alg. for Kids', 'Y', 'Series'),
+                        --     (3, 'Database Sols', 'N', 'Series'),
+                        --     (4, 'Aladdin', 'Y', 'Movies'),
+                        --     (5, 'Cinderella', 'Y', 'Movies');
+
+                        SELECT c.title from Programs as p 
+                        left join Contents as c on c.content_id=p.content_id 
+                        where  month(p.program_date) =6 and year(p.program_date)=2020 and c.kids_content="Y";
