@@ -942,3 +942,37 @@ SELECT distinct author_id from Views where author_id = viewer_id order by author
                         SELECT c.title from Programs as p 
                         left join Contents as c on c.content_id=p.content_id 
                         where  month(p.program_date) =6 and year(p.program_date)=2020 and c.kids_content="Y";
+
+-- Q30 Write an SQL query to find the npv of each query of the Queries table. Return the result table in any order.
+
+            CREATE TABLE IF NOT EXISTS NPV_T (
+                Id INT,
+                Year INT,
+                Npv INT,
+                PRIMARY key (id, year));
+
+            -- INSERT INTO NPV_T (Id, Year, Npv)
+            -- VALUES
+            --     (1, 2018, 100),
+            --     (7, 2020, 30),
+            --     (13, 2019, 40),
+            --     (1, 2019, 113),
+            --     (2, 2008, 121),
+            --     (3, 2009, 12),
+            --     (11, 2020, 99),
+            --     (7, 2019, 0);
+
+            -- CREATE TABLE IF NOT EXISTS Queries (
+            --     Id INT,
+            --     Year INT,
+            --     PRIMARY key (id, year)
+            -- );
+
+            -- INSERT INTO Queries (Id, Year)
+            -- VALUES
+            --     (1, 2019),(2, 2008),(3, 2009),(7, 2018),(7, 2019),(7, 2020),(13, 2019);
+                
+                
+            SELECT q.*, COALESCE(n.Npv, 0) AS Npv 
+            FROM Queries AS q 
+            LEFT JOIN NPV_T AS n ON q.Id = n.Id AND q.Year = n.Year;
