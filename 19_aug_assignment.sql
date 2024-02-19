@@ -812,3 +812,48 @@ SELECT distinct author_id from Views where author_id = viewer_id order by author
         FROM Activity
         GROUP BY player_id
         ) b ON a.player_id = b.player_id AND a.event_date = b.min_event_date;
+
+
+-- Q26 Write an SQL query to get the names of products that have at least 100 units ordered in February 2020 and their amount.
+
+CREATE TABLE if not EXISTS Products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(255),
+    product_category VARCHAR(255)
+);
+
+-- INSERT INTO Products (product_id, product_name, product_category)
+-- VALUES
+--     (1, 'Leetcode Solutions', 'Book'),
+--     (2, 'Jewels of Stringology', 'Book'),
+--     (3, 'HP', 'Laptop'),
+--     (4, 'Lenovo', 'Laptop'),
+--     (5, 'Leetcode Kit', 'T-shirt');
+
+CREATE TABLE IF NOT EXISTS Orders (
+    order_id INT,
+    order_date DATE,
+    units INT,
+    product_id INT,
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+
+
+-- INSERT INTO Orders (product_id, order_date, units)
+-- VALUES
+--     (1, '2020-02-05', 60),
+--     (1, '2020-02-10', 70),
+--     (2, '2020-01-18', 30),
+--     (2, '2020-02-11', 80),
+--     (3, '2020-02-17', 2),
+--     (3, '2020-02-24', 3),
+--     (4, '2020-03-01', 20),
+--     (4, '2020-03-04', 30),
+--     (4, '2020-03-04', 60),
+--     (5, '2020-02-25', 50),
+--     (5, '2020-02-27', 50),
+--     (5, '2020-03-01', 50);
+
+
+SELECT  p.product_name, sum(o.units ) as unit from products p JOIN Orders o on p.product_id= o.product_id 
+WHERE month(o.order_date)="02" and year(o.order_date)=2020 GROUP BY o.product_id having unit >=100;
